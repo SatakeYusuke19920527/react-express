@@ -1,25 +1,20 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, {useEffect} from 'react'
+import axios from 'axios'
+const App = () => {
+  useEffect( () => {
+      fetchData()
+  }, []);
 
-class App extends Component {
-  state = {users: []}
-
-  componentDidMount() {
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => this.setState({ users }));
+  const fetchData = async () => {
+    const res = await axios.get('/users')
+    console.log(res, 'res check')
   }
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Users</h1>
-        {this.state.users.map(user =>
-          <div key={user.id}>{user.username}</div>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>User</h1>
+    </div>
+  )
 }
 
-export default App;
+export default App
